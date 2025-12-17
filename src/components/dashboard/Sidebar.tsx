@@ -31,7 +31,7 @@ export default function Sidebar({ nav = [] as NavGroup[] }: { nav?: NavGroup[] }
             className="h-28 w-[120px] object-containshrink-0 select-none"
             draggable={false}
           />
-          <div className="text-lg font-semibold text-orange-600">Admin Panel</div>
+          <div className="text-lg font-semibold text-orange-600">Ticari Panel</div>
         </div>
       </div>
 
