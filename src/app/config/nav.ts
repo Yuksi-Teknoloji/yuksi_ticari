@@ -37,7 +37,7 @@ export const NAV: Record<Role, RawNavGroup[]> = {
         {
           label: "Komisyon Oranları",
           path: "dashboard/pricing/commission-rates",
-        }
+        },
       ],
     },
     {
@@ -87,21 +87,36 @@ export const NAV: Record<Role, RawNavGroup[]> = {
       items: [
         { label: "Şirket Oluştur", path: "dashboard/companies/create-company" },
         { label: "Şirket Listesi", path: "dashboard/companies/company-list" },
-        { label: "Yetkili Kişiler", path: "dashboard/companies/authorized-person" }, // kök sayfanız buysa böyle bırakın
+        {
+          label: "Yetkili Kişiler",
+          path: "dashboard/companies/authorized-person",
+        }, // kök sayfanız buysa böyle bırakın
       ],
     },
     {
       title: "Kurumsal",
       items: [
-        { label: "Kurumsal Üye Oluştur", path: "dashboard/corporates/create-corporate" },
-        { label: "Kurumsal Üye Listesi", path: "dashboard/corporates/corporate-list" },
+        {
+          label: "Kurumsal Üye Oluştur",
+          path: "dashboard/corporates/create-corporate",
+        },
+        {
+          label: "Kurumsal Üye Listesi",
+          path: "dashboard/corporates/corporate-list",
+        },
       ],
     },
     {
       title: "Çağrı Merkezi",
       items: [
-        { label: "Çağrı Merkezi Üyesi Oluştur", path: "dashboard/supports/create-support" },
-        { label: "Çağrı Merkezi Üyesi Listesi", path: "dashboard/supports/list-support" },
+        {
+          label: "Çağrı Merkezi Üyesi Oluştur",
+          path: "dashboard/supports/create-support",
+        },
+        {
+          label: "Çağrı Merkezi Üyesi Listesi",
+          path: "dashboard/supports/list-support",
+        },
       ],
     },
     {
@@ -112,7 +127,10 @@ export const NAV: Record<Role, RawNavGroup[]> = {
       title: "İçerikler",
       items: [
         { label: "Sayfa Listesi", path: "dashboard/contents/page-list" },
-        { label: "Web Site Referansları", path: "dashboard/contents/referances" },
+        {
+          label: "Web Site Referansları",
+          path: "dashboard/contents/referances",
+        },
       ],
     },
     {
@@ -122,10 +140,16 @@ export const NAV: Record<Role, RawNavGroup[]> = {
         { label: "Araç Tipleri", path: "dashboard/system/vehicle-types" },
         { label: "Yük Tipleri", path: "dashboard/system/load-types" },
         { label: "Ek Fiyatlar", path: "dashboard/system/additional-costs" },
-        { label: "Ödeme Durumları", path: "dashboard/system/transport-packages" },
+        {
+          label: "Ödeme Durumları",
+          path: "dashboard/system/transport-packages",
+        },
         { label: "Km Fiyatları", path: "dashboard/system/km-prices" },
         { label: "Kampanya Kodları", path: "dashboard/system/add-campaign" },
-        { label: "Bildirim Gönder", path: "dashboard/system/send-notification" },
+        {
+          label: "Bildirim Gönder",
+          path: "dashboard/system/send-notification",
+        },
       ],
     },
   ],
@@ -167,7 +191,11 @@ export const NAV: Record<Role, RawNavGroup[]> = {
   company: [
     {
       title: "Ticari",
-      items: [{ label: "Ana", path: "company" }],
+      items: [
+        { label: "Ana", path: "dashboard" },
+        { label: "Yük Oluştur", path: "restaurants/create-load" },
+        { label: "Yük Listesi", path: "restaurants/list-load" },
+      ],
     },
   ],
 
