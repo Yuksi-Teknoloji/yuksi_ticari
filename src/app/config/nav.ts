@@ -193,8 +193,9 @@ export const NAV: Record<Role, RawNavGroup[]> = {
       title: "Ticari",
       items: [
         { label: "Ana", path: "dashboard" },
-        { label: "Yük Oluştur", path: "restaurants/create-load" },
-        { label: "Yük Listesi", path: "restaurants/list-load" },
+        { label: "Profil Yönetimi", path: "dashboard/commercial/profile" },
+        { label: "Yük Oluştur", path: "commercial/create-load" },
+        { label: "Yük Listesi", path: "commercial/list-load" },
       ],
     },
   ],
