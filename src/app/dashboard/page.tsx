@@ -24,5 +24,9 @@ export default function CompanyHome() {
 
   const role = String(roleSegment(claims.userType) || "").toLowerCase();
 
+  if (role !== "company_manager") {
+    redirect("/");
+  }
+
   return <div className="rounded-2xl bg-white p-4 shadow">Ticari Panele Hoşgeldiniz</div>;
 }

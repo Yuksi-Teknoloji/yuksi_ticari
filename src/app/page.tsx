@@ -111,6 +111,11 @@ export default function CompanyLoginPage() {
         userRole = anyClaimRole.toLowerCase().trim();
       }
 
+       if (userRole !== "company_manager") {
+        setErr("Bu panele sadece ticari kullanıcı erişebilir.");
+        return;
+      }
+
       persistToken(token, claims.exp);
 
       

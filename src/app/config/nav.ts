@@ -188,7 +188,7 @@ export const NAV: Record<Role, RawNavGroup[]> = {
     },
   ],
 
-  company: [
+  company_manager: [
     {
       title: "Ticari",
       items: [

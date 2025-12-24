@@ -10,7 +10,7 @@ export default async function CompanyLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const nav = navForRole("company");
+  const nav = navForRole("company_manager");
 
   return (
     <div className="min-h-dvh bg-neutral-100 flex">

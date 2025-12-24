@@ -4,7 +4,7 @@ export type JwtClaims = {
   unique_name?: string;
   userId?: string;
   email?: string;
-  userType?: "restaurant" | "driver" | "admin" | "customer" | "dealer" | string;
+  userType?: "restaurant" | "driver" | "admin" | "customer" | "dealer" | "company_manager";
   nbf?: number; exp?: number; iat?: number;
   iss?: string; aud?: string;
 };
