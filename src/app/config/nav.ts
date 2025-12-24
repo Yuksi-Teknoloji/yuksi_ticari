@@ -194,8 +194,8 @@ export const NAV: Record<Role, RawNavGroup[]> = {
       items: [
         { label: "Ana", path: "dashboard" },
         { label: "Profil Yönetimi", path: "dashboard/commercial/profile" },
-        { label: "Yük Oluştur", path: "commercial/create-load" },
-        { label: "Yük Listesi", path: "commercial/list-load" },
+        { label: "Yük Oluştur", path: "dashboard/commercial/create-load" },
+        { label: "Yük Listesi", path: "dashboard/commercial/list-load" },
       ],
     },
   ],
