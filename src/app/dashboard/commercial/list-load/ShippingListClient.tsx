@@ -95,7 +95,7 @@ export default function ShippingListClient() {
   // filters / paging
   const [limit, setLimit] = React.useState<number | ''>('');
   const [offset, setOffset] = React.useState<number>(0);
-  const [deliveryType, setDeliveryType] = React.useState<'' | 'immediate' | 'appointment'>('');
+  const [deliveryType, setDeliveryType] = React.useState<'' | 'immediate' | 'scheduled'>('');
   const [q, setQ] = React.useState('');
 
   // data
@@ -298,8 +298,8 @@ export default function ShippingListClient() {
             className="rounded-lg border border-neutral-300 bg-white px-2 py-1.5 text-sm"
           >
             <option value="">Tümü</option>
-            <option value="immediate">immediate</option>
-            <option value="appointment">appointment</option>
+            <option value="immediate">Randevusuz</option>
+            <option value="scheduled">Randevulu</option>
           </select>
           <button
             onClick={load}

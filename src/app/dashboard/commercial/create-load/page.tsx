@@ -269,6 +269,49 @@ export default function CreateLoadCommercialPage() {
   const [vehicleProductsError, setVehicleProductsError] = React.useState<string | null>(null);
   const [vehicleProductId, setVehicleProductId] = React.useState<string>('');
 
+  // ✅ NEW: manager profile (company specialCommissionRate)
+  const [specialCommissionRate, setSpecialCommissionRate] = React.useState<number | null>(null);
+  const [commissionLoading, setCommissionLoading] = React.useState(false);
+  const [commissionErr, setCommissionErr] = React.useState<string | null>(null);
+
+  /* --------- Manager Profile (bayi komisyon oranı) --------- */
+  React.useEffect(() => {
+    let cancelled = false;
+
+    async function loadManagerProfile() {
+      setCommissionLoading(true);
+      setCommissionErr(null);
+      try {
+        const res = await fetch('/yuksi/admin/companies/manager/profile', {
+          cache: 'no-store',
+          headers,
+        });
+        const j: any = await readJson(res);
+        if (!res.ok || j?.success === false) {
+          throw new Error(pickMsg(j, `HTTP ${res.status}`));
+        }
+
+        const rate = j?.data?.company?.specialCommissionRate;
+        const n = rate == null ? null : Number(rate);
+
+        if (cancelled) return;
+        setSpecialCommissionRate(Number.isFinite(n as any) ? (n as number) : null);
+      } catch (e: any) {
+        if (!cancelled) {
+          setSpecialCommissionRate(null);
+          setCommissionErr(e?.message || 'Komisyon oranı alınamadı.');
+        }
+      } finally {
+        if (!cancelled) setCommissionLoading(false);
+      }
+    }
+
+    loadManagerProfile();
+    return () => {
+      cancelled = true;
+    };
+  }, [headers]);
+
   /* --------- Ek Hizmetler --------- */
   React.useEffect(() => {
     let cancelled = false;
@@ -560,6 +603,14 @@ export default function CreateLoadCommercialPage() {
 
   const computedTotal = basePrice + extrasTotal;
 
+  // ✅ NEW: bayiye ödenecek tutar (totalPrice * rate / 100)
+  const dealerPayAmount = React.useMemo(() => {
+    const rate = specialCommissionRate;
+    if (!rate || rate <= 0) return 0;
+    if (!computedTotal || computedTotal <= 0) return 0;
+    return Math.round((computedTotal * rate) / 100);
+  }, [computedTotal, specialCommissionRate]);
+
   const toggleExtra = (id: string) => setExtrasSelected((p) => ({ ...p, [id]: !p[id] }));
 
   const applyCoupon = () => {
@@ -642,7 +693,7 @@ export default function CreateLoadCommercialPage() {
 
     setBusy(true);
     try {
-      // ✅ SADECE BURASI DEĞİŞTİ: commercial manager job create endpoint
+      // ✅ commercial manager job create endpoint
       const res = await fetch('/yuksi/admin/companies/manager/jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...headers },
@@ -923,7 +974,8 @@ export default function CreateLoadCommercialPage() {
               üzerinden otomatik hesaplanır.
             </div>
           </div>
-          <div className="self-end text-sm">
+
+          <div className="self-end text-sm space-y-1">
             <div>
               <span className="font-semibold">Ek Hizmet Toplamı: </span>
               {extrasTotal}₺
@@ -931,6 +983,21 @@ export default function CreateLoadCommercialPage() {
             <div>
               <span className="font-semibold">Genel Toplam: </span>
               {computedTotal}₺
+            </div>
+
+            {/* ✅ NEW: bayiye ödenecek tutar */}
+            <div className="pt-2">
+              <span className="font-semibold">Bayiye Ödenecek Tutar: </span>
+              {commissionLoading
+                ? 'Hesaplanıyor…'
+                : specialCommissionRate && specialCommissionRate > 0
+                ? `${dealerPayAmount}₺` + ` (%${specialCommissionRate})`
+                : commissionErr
+                ? '—'
+                : '—'}
+              {commissionErr && (
+                <div className="mt-1 text-xs text-rose-600 whitespace-pre-line">{commissionErr}</div>
+              )}
             </div>
           </div>
         </div>
